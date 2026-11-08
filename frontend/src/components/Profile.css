@@ -1,0 +1,31 @@
+.profile-wrapper {
+  min-height: 100vh;
+  background: var(--bg-light);
+  padding: 40px 6%;
+}
+
+.profile-container { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+
+.profile-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
+
+.order-history-card {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: 0.3s;
+}
+
+.order-history-card:hover { transform: scale(1.01); background: rgba(255, 255, 255, 0.8); }
+
+.order-main-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+
+.order-id-group .value { font-weight: 800; display: block; }
+
+.order-items-preview { display: flex; gap: 10px; margin: 15px 0; }
+.order-items-preview img { width: 50px; height: 50px; border-radius: 8px; object-fit: cover; border: 2px solid white; }
+
+.order-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px; }
+
+.details-link { display: flex; align-items: center; color: #6366f1; font-weight: 700; border: none; background: none; cursor: pointer; }

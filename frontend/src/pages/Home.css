@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --text-main: #1f2937;
+  --glow-yellow: #fbef34;
+  --glow-pink: #ff00ff;
+  --glow-mint: #00ffcc;
+}
+
+/* FIX: Allow global scrolling while keeping the background stunning */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: auto; 
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.home-wrapper {
+  min-height: 100vh;
+  position: relative;
+  /* Retaining your Shopping Background Image */
+  background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
+              url("https://static.vecteezy.com/system/resources/thumbnails/004/299/815/small/online-shopping-on-phone-buy-sell-business-digital-web-banner-application-money-advertising-payment-ecommerce-illustration-search-vector.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Floating Animated Blobs in the Background */
+.blob {
+  position: fixed; /* Fixed so they stay in view while scrolling */
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+  filter: blur(80px);
+  border-radius: 50%;
+  z-index: 0;
+  animation: moveBlobs 20s infinite alternate;
+}
+.blob-1 { top: -10%; left: -10%; }
+.blob-2 { bottom: -10%; right: -10%; animation-delay: -5s; }
+
+@keyframes moveBlobs {
+  from { transform: translate(0, 0); }
+  to { transform: translate(100px, 100px); }
+}
+
+/* Sticky Glass Navbar */
+.shop-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 6%;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 24px;
+  color: var(--text-main);
+}
+
+.brand-icon { color: var(--primary); }
+
+.nav-search .search-box {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: 1px solid var(--glass-border);
+  width: 350px;
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.logout-pill {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Content Container */
+.home-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 6%;
+}
+
+/* Category Scroller */
+.category-bar {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 30px;
+  scrollbar-width: none;
+}
+
+.cat-pill {
+  padding: 10px 25px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cat-pill.active {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+/* Product Cards with Neon Glow */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 35px;
+  padding-bottom: 50px;
+}
+
+.product-card {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 15px;
+  border: 1px solid var(--glass-border);
+  transition: all 0.4s ease;
+}
+
+/* The Subtle Rainbow Glow around cards */
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.product-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  background: linear-gradient(45deg, var(--glow-yellow), var(--glow-pink), var(--glow-mint));
+  border-radius: 26px;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.product-card:hover::before {
+  opacity: 0.4;
+}
+
+.image-wrapper {
+  height: 250px;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.5s;
+}
+
+.product-card:hover img { transform: scale(1.1); }
+
+.product-info h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.desc-text {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 15px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.price-tag {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+}
+
+.add-btn, .buy-btn {
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+  flex: 1;
+}
+
+.add-btn {
+  background: white;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.buy-btn {
+  background: var(--primary);
+  border: none;
+  color: white;
+}
+
+.buy-btn:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 8px 15px rgba(99, 102, 241, 0.3);
+}
+
+/* Custom Scrollbar for the whole page */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}

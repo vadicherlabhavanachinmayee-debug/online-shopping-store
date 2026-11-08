@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+
+:root {
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --glass-bg: rgba(255, 255, 255, 0.7); /* Increased transparency for better blending */
+  --text-main: #1f2937;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow: hidden;
+  /* Blending the background image with a dark overlay to make elements pop */
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+              url("https://static.vecteezy.com/system/resources/thumbnails/004/299/815/small/online-shopping-on-phone-buy-sell-business-digital-web-banner-application-money-advertising-payment-ecommerce-illustration-search-vector.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Floating Animated Blobs (Now blended behind the card) */
+.blob {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.3) 0%, rgba(168, 85, 247, 0.3) 100%);
+  filter: blur(80px);
+  border-radius: 50%;
+  z-index: -1; /* Placed behind the card but above the background image */
+  animation: move 20s infinite alternate;
+}
+.blob-1 { top: -5%; left: 10%; }
+.blob-2 { bottom: -5%; right: 10%; animation-delay: -5s; }
+
+@keyframes move {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(50px, 50px) scale(1.1); }
+}
+
+/* Glass Card */
+.login-glass-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 28px;
+  padding: 48px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* Ensure the content stays above the glow */
+  z-index: 1;
+  overflow: visible; 
+}
+
+/* The Glowing Aura */
+.login-glass-card::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: -1;
+  
+  /* Yellow, Pink, and Mint Green Gradient */
+  background: linear-gradient(45deg, #fbef34, #ff00ff, #00ffcc, #fbef34);
+  background-size: 400%;
+  border-radius: 32px; /* Slightly larger than the card radius */
+  
+  /* The Glow Effect */
+  filter: blur(20px);
+  opacity: 0.6;
+  animation: glowMove 8s linear infinite;
+}
+
+/* Optional: Adding a thin glowing border line */
+.login-glass-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  padding: 2px; /* Border thickness */
+  background: linear-gradient(45deg, #fbef34, #ff00ff, #00ffcc);
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Animation to move the glow colors around */
+@keyframes glowMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.brand-icon {
+  background: white;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  margin: 0 auto 16px;
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+}
+
+.login-header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.login-header p {
+  color: #4b5563;
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+/* Floating Labels & Inputs */
+.input-group {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 18px 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 14px;
+  font-size: 16px;
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.input-group label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* Label Animation Logic */
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+  top: 0;
+  background: #ffffff;
+  padding: 0 8px;
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* Password Toggle Visibility */
+.pwd-toggle {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+}
+
+/* Submit Button with Ripple Effect */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+}
+
+.submit-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.4);
+}
+
+.submit-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Alert Message Boxes */
+.alert-box {
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.alert-box.success { background: rgba(220, 252, 231, 0.9); color: #166534; border: 1px solid #bbf7d0; }
+.alert-box.error { background: rgba(254, 226, 226, 0.9); color: #991b1b; border: 1px solid #fecaca; }
+
+.login-footer {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.login-footer span {
+  color: var(--primary);
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}

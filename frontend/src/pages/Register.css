@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+
+:root {
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --text-main: #1f2937;
+  /* Your requested Glow Colors */
+  --glow-yellow: #fbef34;
+  --glow-pink: #ff00ff;
+  --glow-mint: #00ffcc;
+}
+
+/* Full Page Setup with Shopping Image */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  /* Darkened overlay to blend the image with the neon glow */
+  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), 
+              url("https://static.vecteezy.com/system/resources/thumbnails/004/299/815/small/online-shopping-on-phone-buy-sell-business-digital-web-banner-application-money-advertising-payment-ecommerce-illustration-search-vector.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Floating Blobs for extra depth */
+.blob {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.3) 0%, rgba(168, 85, 247, 0.3) 100%);
+  filter: blur(80px);
+  border-radius: 50%;
+  z-index: -1;
+  animation: moveBlobs 20s infinite alternate;
+}
+.blob-1 { top: -5%; left: 10%; }
+.blob-2 { bottom: -5%; right: 10%; animation-delay: -5s; }
+
+/* Glowing Glass Card */
+.login-glass-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 28px;
+  padding: 40px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* The Tri-Color Glowing Aura (Yellow, Pink, Mint Green) */
+.login-glass-card::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  z-index: -1;
+  background: linear-gradient(45deg, var(--glow-yellow), var(--glow-pink), var(--glow-mint), var(--glow-yellow));
+  background-size: 400%;
+  border-radius: 32px;
+  filter: blur(20px);
+  opacity: 0.7;
+  animation: rotateGlow 8s linear infinite;
+}
+
+/* Header Section */
+.login-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.brand-icon {
+  background: white;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  margin: 0 auto 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.login-header h1 {
+  font-size: 26px;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.login-header p {
+  color: #4b5563;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Form Styling */
+.input-group {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  font-size: 15px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+.input-group label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+/* Floating Label Animation */
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+  top: 0;
+  background: white;
+  padding: 0 6px;
+  font-size: 11px;
+  color: var(--primary);
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: #ffffff;
+}
+
+/* Action Button */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+/* Footer Link */
+.login-footer {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.login-footer span {
+  color: var(--primary);
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* Keyframes */
+@keyframes rotateGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes moveBlobs {
+  from { transform: translate(0, 0); }
+  to { transform: translate(40px, 40px); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
